@@ -6,13 +6,13 @@ The Data Insertion API supports HTTP POST and HTTP GET for submitting data to Ad
 
 ## HTTP POST
 
-Use an HTTP POST to submit properly-formatted Data Insertion XML to the Data Insertion URL. The Data Insertion URL differs from the standard JavaScript data submission URL. Adobe ClientCare can provide the domain name of the Adobe data collection servers where you should send data. For example:
+Use an HTTP POST to submit properly-formatted Data Insertion JSON or XML to the Data Insertion URL. JSON is the recommended format and XML will eventually be deprecated at some future date. The Data Insertion URL differs from the standard JavaScript data submission URL. Adobe ClientCare can provide the domain name of the Adobe data collection servers where you should send data. For example:
 
-`http://namespace.sc.omtrdc.net/b/ss//6` 
+`http://namespace.sc.omtrdc.net/b/ss//7` [TBD - code for JSON processing]
 
-`http://namespace.sc.omtrdc.net/b/ss//6` 
+`http://namespace.sc.omtrdc.net/b/ss//7` 
 
-**Note:** The "6" code at the end of the URL indicates that the data submission requires XML processing.
+**Note:** The "7" [TBD] code at the end of the URL indicates that the data submission requires JSON processing. For XML processing use "6".
 
 Upon receipt, Adobe servers perform basic tag validation of the data insertion. If it encounters an error, Adobe returns a `Failure` response. If the data insertion is successful, Adobe queues the data insertion request for processing by the standard Analytics Data Processing Engine. The engine processes these requests in the same way it processes data collected via JavaScript.
 
@@ -26,6 +26,8 @@ When using HTTP POST with the Data Insertion API, consider the following:
     -   Microsoft .Net Framework version 1.1 supports the HTTP header: `Expect: 100-Continue in HTTP POST requests`, but Experience Cloud servers reject POST data sent with this type of request. To avoid this, set `ServicePointManager.Expect100Continue = False`. For more information, see [http://msdn.microsoft.com/library/en-us/cpref/html/frlrfsystemnetservicepointmanagerclassexpect100continuetopic.asp](http://msdn.microsoft.com/library/en-us/cpref/html/frlrfsystemnetservicepointmanagerclassexpect100continuetopic.asp) .
 
 ## HTTP GET
+
+Note: We recommed using HTTP POST with JSON as this will be the supported format in the long-term. HTTP GET and HTTP POST using XML will be deprecated eventualy.
 
 Use an HTTP GET to submit data to the Data Insertion URL in a query-string format that supports shortened variable names \(for more information, see "Variables and Query String Parameters" in the *Analytics Implementation Guide*, available at **Help** \> **Documentation** in the Experience Cloud.
 
